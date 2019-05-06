@@ -9,9 +9,9 @@ $sql_p = "select * from phone where id=$item_id";
                            //$cnx->query is used with select
      
 	 $p = $res->fetch();
-//$cart->value+=$p['price']
-$_SESSION["lePrix"] +=$p['price'];
+echo $p['price'];
+$_SESSION['lePrix'] +=$p['price'];
 
 
-header('Location:index.php');
+//header('Location:index.php');
 ?>

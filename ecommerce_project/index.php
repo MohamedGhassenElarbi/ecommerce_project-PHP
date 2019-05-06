@@ -52,7 +52,7 @@ require_once('data.php');
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="#">
+						<a class="logo" href="index.php">
 							<img src="./img/logo.png" alt="">
 						</a>
 					</div>
@@ -87,6 +87,7 @@ require_once('data.php');
 								}else{
                                     echo '0';
 								}
+								$_SESSION['var']=$varAux;
 								 ?></span>
 							</a>
 							
@@ -128,7 +129,7 @@ require_once('data.php');
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="#">Home</a></li>
+						<li><a href="index.php">Home</a></li>
 						<li><a href="#">Contact Us</a></li>
 					</ul>
 				</div>
@@ -149,31 +150,31 @@ require_once('data.php');
 				<div id="home-slick">
 					<!-- banner -->
 					<div class="banner banner-1">
-						<img src="./img/banner01.jpg" alt="">
+						<img src="./img/ph3.jpg" alt="">
 						<div class="banner-caption text-center">
-							<h1>Bags sale</h1>
+							
 							<h3 class="white-color font-weak">Up to 50% Discount</h3>
-							<button class="primary-btn">Shop Now</button>
+							<a href="index.php"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
 					<!-- /banner -->
 
 					<!-- banner -->
 					<div class="banner banner-1">
-						<img src="./img/banner02.jpg" alt="">
+						<img src="./img/ph2.jpg" alt="">
 						<div class="banner-caption">
 							<h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href="index.php"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
 					<!-- /banner -->
 
 					<!-- banner -->
 					<div class="banner banner-1">
-						<img src="./img/banner03.jpg" alt="">
+						<img src="./img/ph1.jpg" alt="">
 						<div class="banner-caption">
 							<h1 class="white-color">New Product <span>Collection</span></h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href="index.php"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
 					<!-- /banner -->

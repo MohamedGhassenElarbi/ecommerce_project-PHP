@@ -63,7 +63,7 @@ $search = $_POST['recherche'];
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="#">
+						<a class="logo" href="index.php">
 							<img src="./img/logo.png" alt="">
 						</a>
 					</div>
@@ -71,8 +71,8 @@ $search = $_POST['recherche'];
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
+					<form method="Post" action="search.php">
+							<input class="input search-input" type="text" placeholder="Enter your keyword" name="recherche">
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
@@ -139,12 +139,8 @@ $search = $_POST['recherche'];
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Shop</a></li>
-						<li><a href="#">Women </a></li>
-						<li><a href="#">Men </a></li>
-						<li><a href="#">Sales</a></li>
-					</ul>
+						<li><a href="index.phps">Home</a></li>
+						<li><a href="#">Contact Us</a></li>
 				</div>
 				<!-- menu nav -->
 			</div>

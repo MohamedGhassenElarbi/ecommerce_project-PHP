@@ -1,19 +1,17 @@
 <?php
-require_once('phone.php');
 include('connection.php');
+require_once('phone.php');
 
-$phoneNom = $_GET['name'];
-    $sql_mq = "select * from phone where  name ='$phoneNom'";
+$phoneId = $_GET['id'];
+    $sql_note = "select * from phone where id='$phoneId'";
     // 2. Exécuter la requête SQL
-    $res=$cnx->query($sql_mq);//exec is used with insert/update/delete
+    $res=$cnx->query($sql_note);//exec is used with insert/update/delete
                            //$cnx->query is used with select
      
-    $phones=array(); 
-    $p = $res->fetchAll();                     
-     foreach($p as $ps){   
-     $var=new phone($ps['id'],$ps['state'],$ps['name'],$ps['marque'],$ps['image'],$ps['price'],$ps['description'],$ps['couleur']);
-    $phones[] = $var; 
-                        }    
+	 $p = $res->fetch(); 
+	                    
+    $var=new phone($p['id'],$p['state'],$p['name'],$p['marque'],$p['image'],$p['price'],$p['description'],$p['couleur']);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,38 +69,15 @@ $phoneNom = $_GET['name'];
 
 					<!-- Search -->
 					<div class="header-search">
-					<form method="Post" action="search.php">
+						<form method="Post" action="search.php">
 							<input class="input search-input" type="text" placeholder="Enter your keyword" name="recherche">
 							<button class="search-btn"><i class="fa fa-search"></i></button>
-						</form>						
+						</form>
 					</div>
 					<!-- /Search -->
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">
-						
-
-						<!-- Cart -->
-						<li class="header-cart dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-								<div class="header-btns-icon">
-									<i class="fa fa-shopping-cart"></i>
-									<span class="qty"><?php echo 0?></span>
-								</div>
-								<strong class="text-uppercase">My Cart:</strong>
-								<br>
-								<span><?php 
-								@$varAux=$_SESSION['lePrix'];
-								if (isset($varAux)) {
-									echo $varAux;
-								}else{
-                                    echo '0';
-								}
-								 ?></span>
-							</a>
-							
-						</li>
-						<!-- /Cart -->
 
 						<!-- Mobile nav toggle-->
 						<li class="nav-toggle">
@@ -123,24 +98,13 @@ $phoneNom = $_GET['name'];
 		<!-- container -->
 		<div class="container">
 			<div id="responsive-nav">
-				<!-- category nav -->
-				<div class="category-nav">
-					<span class="category-header">Marques Disponibles <i class="fa fa-list"></i></span>
-					<ul class="category-list">
-
-					<?php foreach($phones as $phone):?>
-					<li><a href="marque.php?name=<?php echo$phone->getName()?>"><?php echo $phone->getName()?></a></li>
-					<?php endforeach?>
-					</ul>
-				</div>
-				<!-- /category nav -->
-
 				<!-- menu nav -->
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="index.php">Home</a></li>
-						<li><a href="#">Contact Us</a></li>
+						<li><a href="admin.php">Ajouter un produit</a></li>
+						<li><a href="delete.html">Supprimer un produit</a></li>
+						<li><a href="modifier.php">Modifier un produit</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -149,65 +113,62 @@ $phoneNom = $_GET['name'];
 		<!-- /container -->
 	</div>
 	<!-- /NAVIGATION -->
+
 	<!-- section -->
 	<div class="section">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h2 class="title"></h2>
+			<div class="header-search">
+						<form method="Post" action="aff_modif.php">
+							<input class="input search-input" type="text" placeholder="Saisir l'ID du Smartphone " name="recherche">
+							<button class="search-btn"><i class="fa fa-search"></i></button>
+						</form>
 					</div>
-				</div>
-				<!-- section title -->
-
+				<form id="checkout-form" class="clearfix" method="Post" action="update.php">
+					<div class="col-md-6">
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Modifier un produit</h3>
+                            </div>
+                            <div class="form-group">
+								<input class="input" type="text" name="id" value="<?php echo $var->getId()?>">
+							</div
+							<div class="form-group">
+								<input class="input" type="text" name="marque" placeholder="Marque" value="<?php echo $var->getName()?>" >
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="modele" placeholder="Modèle"value="<?php echo $var->getMarque()?>">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="etat" placeholder="Etat"value="<?php echo $var->getState()?>">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="prix" placeholder="Prix"value="<?php echo $var->getPrice()?>">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="lien" placeholder="Lien d'image"value="<?php echo $var->getImage()?>">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="coleur" placeholder="Coleur"value="<?php echo $var->getCouleur()?>">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="description" placeholder="Description"value="<?php echo $var->getDescription()?>">
+							</div>
+							<div class="form-group">
+							<button class="primary-btn">Modifier le Produit</button>
+							</div>
+						</div>
+					</div>
+					</div>
+				</form>
 			</div>
 			<!-- /row -->
-
-			<!-- row -->
-			<div class="row">
-				<!-- Product Single -->
-				<?php foreach ($phones as $phone): ?>
-				<div class="col-md-3 col-sm-6 col-xs-6">
-					<div class="product product-single">
-						<div class="product-thumb">
-							<div class="product-label">
-							</div>
-							<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href="product-page.php?id=<?php echo $phone->getId()?>"> Quick view</a></button>
-							<img src="<?php echo $phone->getImage() ?>" alt="">
-						</div>
-						<div class="product-body">
-							<h3 class="product-price">$<?php echo $phone->getPrice() ?></h3>
-							<div class="product-rating">
-								<?php for($i=0;$i<$phone->getState();$i++):?>
-								<i class="fa fa-star"></i>
-								<?php endfor?>
-							</div>
-							<h2 class="product-name"><a href="#"><?php echo $phone->getName() ?></a></h2>
-							<h3 class="product-name"><a href="#"><?php echo $phone->getMarque() ?></a></h3>
-							<div class="product-btns">
-								<!--<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-								<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>-->
-								<form action="addToCart.php" method="GET">
-								<input type="hidden" name="id"value="<?php echo $phone->getId()?>">
-								<i class="fa fa-shopping-cart"></i> <input type="submit" class="primary-btn add-to-cart" value="Add to Cart">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /Product Single -->
-				<?php endforeach ?>
-			</div>
-			
 		</div>
 		<!-- /container -->
 	</div>
 	<!-- /section -->
-
 	<!-- FOOTER -->
 	<footer id="footer" class="section section-grey">
 		<!-- container -->
@@ -305,11 +266,6 @@ $phoneNom = $_GET['name'];
 		<!-- /container -->
 	</footer>
 	<!-- /FOOTER -->
-	<?php
-	session_unset(); 
-	session_destroy();
-	?>
-
 	<!-- jQuery Plugins -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
